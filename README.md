@@ -28,6 +28,7 @@ git clone https://github.com/AFDSoftworks/portfolio.git
 cd portfolio
 npm install
 npm run dev
+```
 
 📬 Contacto
 Podés escribirnos a: afdsoftworks@gmail.com

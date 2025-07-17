@@ -6,7 +6,7 @@ export default function Contact() {
         <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Contacta con 
-                    <span className="text-purple-300">Nosotros</span>
+                    <span className="text-purple-300"> Nosotros</span>
                 </h2>
                 <p className="text-gray-300 max-w-2xl mx-auto">Completa el formulario y nos pondremos en contacto contigo lo antes posible</p>
             </div>
@@ -16,7 +16,7 @@ export default function Contact() {
             <div className="mt-12 grid md:grid-cols-3 gap-8 text-center">
                 <div className="bg-white/5 p-6 rounded-xl border border-white/10">
                     <h3 className="text-lg font-semibold mb-2">Email</h3>
-                    <a href="mailto:contacto@afdsoftworks.com" className="text-purple-300 hover:text-purple-200">
+                    <a href="mailto:afdsoftworks@gmail.com" className="text-purple-300 hover:text-purple-200">
                         contacto@afdsoftworks.com
                     </a>
                 </div>

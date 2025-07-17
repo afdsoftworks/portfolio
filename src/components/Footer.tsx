@@ -14,11 +14,16 @@ export default function Footer() {
                         Especialistas en desarrollo web y soluciones digitales personalizadas.
                     </p>
                     <div className="flex space-x-4">
+                        {/* 
                         {['Twitter', 'LinkedIn', 'GitHub'].map((social) => (
                             <a key={social} href="#" className="text-gray-300 hover:text-white transition" aria-label={social}>
                                 {social}
                             </a>
                         ))}
+                        */}
+                        <a key={'GitHub'} href="https://github.com/afdsoftworks" className="text-gray-300 hover:text-white transition" aria-label={'GitHub'}>
+                            {'GitHub'}
+                        </a>
                     </div>
                 </div>
                 <div>
@@ -36,7 +41,7 @@ export default function Footer() {
                 <div>
                     <h4 className="text-lg font-semibold mb-4">Contacto</h4>
                     <ul className="space-y-2 text-gray-300">
-                        <li>info@afdsoftworks.com</li>
+                        <li> <a href="mailto:afdsoftworks@gmail.com">info@afdsoftworks.com</a></li>
                         <li>(+598) 09X-XXX-XXX</li>
                         <li>Rivera, Uruguay</li>
                     </ul>

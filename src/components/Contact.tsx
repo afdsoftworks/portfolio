@@ -20,12 +20,11 @@ export default function Contact() {
                         contacto@afdsoftworks.com
                     </a>
                 </div>
-                <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-                    <h3 className="text-lg font-semibold mb-2">Teléfono</h3>
-                    <a href="tel:+5989XXXXXXX" className="text-purple-300 hover:text-purple-200">
-                        (+598) 09X-XXX-XXX
+            <div className="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 className="text-lg font-semibold mb-2">Télefono</h3>
+                    <a href="https://wa.me/59892480589?text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios" target="_blank" rel="noopener noreferrer">(+598) 092-480-589
                     </a>
-                </div>
+          </div>
                 <div className="bg-white/5 p-6 rounded-xl border border-white/10">
                     <h3 className="text-lg font-semibold mb-2">Redes Sociales</h3>
                     <div className="flex justify-center space-x-4">

@@ -1,6 +1,33 @@
 import { FiCode } from 'react-icons/fi'
 
 export default function Portfolio() {
+<<<<<<< Updated upstream
+=======
+const proyectos = [
+  {
+    id: 1,
+    nombre: 'Fronterón MTB',
+    descripcion: 'Sitio web responsive desarrollado con Next.js y Tailwind.',
+    imagen: '/portfolio/fronteron.jpg',
+    estado: 'En construcción',
+  },
+    {
+    id: 1.1,
+    nombre: 'Florería Brasil',
+    descripcion: 'Sitio web responsive desarrollado con Next.js y Tailwind.',
+    imagen: '/portfolio/floreria.jpg',
+    estado: 'En construcción',
+  },
+  ...Array.from({ length: 4 }, (_, i) => ({
+    id: i + 2,
+    nombre: `Proyecto #${i + 3}`,
+    descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',
+    imagen: null,
+    estado: 'Próximamente',
+  })),
+]
+
+>>>>>>> Stashed changes
   return (
     <section id="proyectos" className="py-20 px-6 bg-white/5">
         <div className="container mx-auto max-w-6xl">

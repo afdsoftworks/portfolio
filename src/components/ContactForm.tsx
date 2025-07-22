@@ -12,7 +12,7 @@ const formSchema = z.object({
   email: z.string().email({ message: 'Email inválido' }),
   message: z.string().min(10, { message: 'Mensaje muy corto' }).max(500),
   phone: z.string().optional(),
-  service: z.enum(['web', 'mobile', 'consulting', 'other']).default('web')
+  service: z.enum(['web', 'mobile', 'consulting', 'other'])
 })
 
 type FormData = z.infer<typeof formSchema>

@@ -16,7 +16,7 @@ const proyectos = [
     imagen: '/portfolio/floreria.jpg',
     estado: 'En construcción',
   },
-  ...Array.from({ length: 5 }, (_, i) => ({
+  ...Array.from({ length: 4 }, (_, i) => ({
     id: i + 2,
     nombre: `Proyecto #${i + 2}`,
     descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',

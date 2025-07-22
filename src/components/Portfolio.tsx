@@ -1,8 +1,6 @@
 import { FiCode } from 'react-icons/fi'
 
 export default function Portfolio() {
-<<<<<<< Updated upstream
-=======
 const proyectos = [
   {
     id: 1,
@@ -27,7 +25,6 @@ const proyectos = [
   })),
 ]
 
->>>>>>> Stashed changes
   return (
     <section id="proyectos" className="py-20 px-6 bg-white/5">
         <div className="container mx-auto max-w-6xl">

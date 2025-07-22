@@ -42,7 +42,8 @@ export default function Footer() {
                     <h4 className="text-lg font-semibold mb-4">Contacto</h4>
                     <ul className="space-y-2 text-gray-300">
                         <li> <a href="mailto:afdsoftworks@gmail.com">info@afdsoftworks.com</a></li>
-                        <li>(+598) 09X-XXX-XXX</li>
+                        <li> <a href="https://wa.me/59892480589?text=Hola%2C%20estoy%20interesado%20en%20sus%20servicios" target="_blank" rel="noopener noreferrer">(+598) 092-480-589
+                        </a></li>
                         <li>Rivera, Uruguay</li>
                     </ul>
                 </div>

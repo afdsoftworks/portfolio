@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi'
@@ -21,14 +21,14 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema)
-  })
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+  reset
+} = useForm<FormData>({
+  resolver: zodResolver(formSchema) as Resolver<FormData>
+})
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)

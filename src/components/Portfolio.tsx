@@ -1,29 +1,44 @@
+import Link from 'next/link'
 import { FiCode } from 'react-icons/fi'
 
 export default function Portfolio() {
-const proyectos = [
-  {
-    id: 1,
-    nombre: 'Fronterón MTB',
-    descripcion: 'Sitio web responsive desarrollado con Next.js y Tailwind.',
-    imagen: '/portfolio/fronteron.jpg',
-    estado: 'En construcción',
-  },
+  const proyectos = [
     {
-    id: 1.1,
-    nombre: 'Florería Brasil',
-    descripcion: 'Sitio web responsive desarrollado con Next.js y Tailwind.',
-    imagen: '/portfolio/floreria.jpg',
-    estado: 'En construcción',
-  },
-  ...Array.from({ length: 4 }, (_, i) => ({
-    id: i + 2,
-    nombre: `Proyecto #${i + 2}`,
-    descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',
-    imagen: null,
-    estado: 'Próximamente',
-  })),
-]
+      id: 1,
+      nombre: 'Fronterón MTB',
+      descripcion:
+        'Vive la emoción del MTB en senderos únicos: rutas desafiantes, seguimiento en tiempo real y toda la comunidad de ciclistas en un solo sitio.',
+      imagen: '/portfolio/fronteron.jpg',
+      estado: 'En construcción',
+      href: 'https://www.fronteronmtb.com/',
+    },
+    {
+      id: 1.1,
+      nombre: 'Florería Brasil',
+      descripcion:
+        'Explora nuestra colección de ramos frescos y personalizados: flores autóctonas, arreglos exclusivos y entregas puntuales para cada ocasión.',
+      imagen: '/portfolio/floreria.jpg',
+      estado: 'En construcción',
+      href: '',
+    },
+    {
+      id: 1.2,
+      nombre: 'Autoclick',
+      descripcion:
+        'Encuentra tu próxima máquina perfecta: amplio catálogo, filtros intuitivos y opciones de financiamiento para que estrenes vehículo sin complicaciones.',
+      imagen: '/portfolio/autoclick.png',
+      estado: 'En construcción',
+      href: 'https://autoclick-lyart.vercel.app/',
+    },
+    ...Array.from({ length: 4 }, (_, i) => ({
+      id: i + 2,
+      nombre: `Proyecto #${i + 2}`,
+      descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',
+      imagen: null,
+      estado: 'Próximamente',
+      href: '#',
+    })),
+  ]
 
   return (
     <section id="proyectos" className="py-20 px-6 bg-white/5">
@@ -39,8 +54,11 @@ const proyectos = [
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {proyectos.map((proyecto) => (
-            <div
+            <Link
               key={proyecto.id}
+              href={proyecto.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-purple-300/30 transition-all duration-300"
             >
               <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-indigo-900/50 flex items-center justify-center">
@@ -62,16 +80,16 @@ const proyectos = [
               <div className="p-6 bg-gradient-to-b from-white/5 to-white/10">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-bold">{proyecto.nombre}</h3>
-                  <div className="flex justify-between items-start mb-3">
-                    <span
+                  <span
                     className={`text-xs px-2 py-1 rounded-full
-                        ${proyecto.estado === 'En construcción'
-                        ? 'bg-yellow-500/10 text-white-300 border border-yellow-300/30'
-                        : 'bg-white/10 text-white'}`}
-                >
+                      ${
+                        proyecto.estado === 'En construcción'
+                          ? 'bg-yellow-500/10 text-yellow-300 border border-yellow-300/30'
+                          : 'bg-white/10 text-white'
+                      }`}
+                  >
                     {proyecto.estado}
-                    </span>
-                    </div>
+                  </span>
                 </div>
                 <p className="text-gray-300 text-sm mb-4">{proyecto.descripcion}</p>
 
@@ -86,7 +104,7 @@ const proyectos = [
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

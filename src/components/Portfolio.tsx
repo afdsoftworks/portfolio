@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { FiCode } from 'react-icons/fi'
 
@@ -72,9 +73,11 @@ export default function Portfolio() {
             >
               <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-indigo-900/50 flex items-center justify-center">
                 {proyecto.imagen ? (
-                  <img
+                  <Image
                     src={proyecto.imagen}
                     alt={proyecto.nombre}
+                    width={800}
+                    height={534}
                     className="object-cover w-full h-full"
                   />
                 ) : (

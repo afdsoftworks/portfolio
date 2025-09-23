@@ -14,6 +14,15 @@ export default function Portfolio() {
     },
     {
       id: 1.1,
+      nombre: 'Autoclick',
+      descripcion:
+        'Encuentra tu próxima máquina perfecta: amplio catálogo, filtros intuitivos y opciones de financiamiento para que estrenes vehículo sin complicaciones.',
+      imagen: '/portfolio/autoclick.jpg',
+      estado: 'En construcción',
+      href: 'https://proy001-autoclick.vercel.app/',
+    },
+    {
+      id: 1.2,
       nombre: 'Florería Brasil',
       descripcion:
         'Explora nuestra colección de ramos frescos y personalizados: flores autóctonas, arreglos exclusivos y entregas puntuales para cada ocasión.',
@@ -22,17 +31,17 @@ export default function Portfolio() {
       href: '',
     },
     {
-      id: 1.2,
-      nombre: 'Autoclick',
+      id: 1.3,
+      nombre: 'AeroFest',
       descripcion:
-        'Encuentra tu próxima máquina perfecta: amplio catálogo, filtros intuitivos y opciones de financiamiento para que estrenes vehículo sin complicaciones.',
-      imagen: '/portfolio/autoclick.png',
+        'Punta del Este se prepara para vivir una experiencia única en 2026: un espectáculo aéreo que reunirá a los mejores pilotos y aeronaves del mundo. Con acrobacias impresionantes, exhibiciones de aviación civil y militar, y un marco inigualable junto al mar, el evento promete emoción, adrenalina y diversión para toda la familia.',
+      imagen: '/portfolio/aerofest.jpg',
       estado: 'En construcción',
-      href: 'https://autoclick-lyart.vercel.app/',
+      href: '',
     },
-    ...Array.from({ length: 4 }, (_, i) => ({
-      id: i + 2,
-      nombre: `Proyecto #${i + 2}`,
+    ...Array.from({ length: 2 }, (_, i) => ({
+      id: i + 5,
+      nombre: `Proyecto #${i + 5}`,
       descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',
       imagen: null,
       estado: 'Próximamente',

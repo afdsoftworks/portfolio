@@ -3,36 +3,28 @@ import Link from 'next/link'
 import { FiCode } from 'react-icons/fi'
 
 export default function Portfolio() {
-  const proyectos = [
+  // proyectos “reales”
+  const base = [
     {
       id: 1,
       nombre: 'Fronterón MTB',
       descripcion:
         'Vive la emoción del MTB en senderos únicos: rutas desafiantes, seguimiento en tiempo real y toda la comunidad de ciclistas en un solo sitio.',
       imagen: '/portfolio/fronteron.jpg',
-      estado: 'En construcción',
+      estado: 'Desplegado',
       href: 'https://www.fronteronmtb.com/',
     },
     {
-      id: 1.1,
+      id: 2,
       nombre: 'Autoclick',
       descripcion:
         'Encuentra tu próxima máquina perfecta: amplio catálogo, filtros intuitivos y opciones de financiamiento para que estrenes vehículo sin complicaciones.',
       imagen: '/portfolio/autoclick.jpg',
-      estado: 'En construcción',
-      href: 'https://proy001-autoclick.vercel.app/',
+      estado: 'En construcción', // cambiar estado, admite "En construcción" & "Desplegado".
+      href: '#',
     },
     {
-      id: 1.2,
-      nombre: 'Florería Brasil',
-      descripcion:
-        'Explora nuestra colección de ramos frescos y personalizados: flores autóctonas, arreglos exclusivos y entregas puntuales para cada ocasión.',
-      imagen: '/portfolio/floreria.jpg',
-      estado: 'En construcción',
-      href: '',
-    },
-    {
-      id: 1.3,
+      id: 3,
       nombre: 'AeroFest',
       descripcion:
         'Punta del Este se prepara para vivir una experiencia única en 2026: un espectáculo aéreo que reunirá a los mejores pilotos y aeronaves del mundo. Con acrobacias impresionantes, exhibiciones de aviación civil y militar, y un marco inigualable junto al mar, el evento promete emoción, adrenalina y diversión para toda la familia.',
@@ -40,15 +32,25 @@ export default function Portfolio() {
       estado: 'En construcción',
       href: '',
     },
-    ...Array.from({ length: 2 }, (_, i) => ({
-      id: i + 5,
-      nombre: `Proyecto #${i + 5}`,
+  ]
+
+  // cantidad total deseada (siempre 6 y par)
+  const TOTAL = 6
+
+  // rellena con placeholders numerados desde #1
+  const placeholders = Array.from(
+    { length: TOTAL - base.length },
+    (_, i) => ({
+      id: base.length + i + 1,
+      nombre: `Proyecto #${i + 1}`,
       descripcion: 'Este espacio mostrará uno de nuestros futuros desarrollos',
       imagen: null,
       estado: 'Próximamente',
       href: '#',
-    })),
-  ]
+    })
+  )
+
+  const proyectos = [...base, ...placeholders]
 
   return (
     <section id="proyectos" className="py-20 px-6 bg-white/5">
@@ -62,16 +64,18 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {proyectos.map((proyecto) => (
             <Link
               key={proyecto.id}
               href={proyecto.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-purple-300/30 transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl border border-white/10
+                         hover:border-purple-300/30 transition-all duration-300
+                         flex flex-col h-full"
             >
-              <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-indigo-900/50 flex items-center justify-center">
+              <div className="w-full h-56 md:h-64 lg:h-72 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 flex items-center justify-center overflow-hidden">
                 {proyecto.imagen ? (
                   <Image
                     src={proyecto.imagen}
@@ -89,7 +93,7 @@ export default function Portfolio() {
                 )}
               </div>
 
-              <div className="p-6 bg-gradient-to-b from-white/5 to-white/10">
+              <div className="p-6 bg-gradient-to-b from-white/5 to-white/10 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-bold">{proyecto.nombre}</h3>
                   <span
@@ -97,6 +101,8 @@ export default function Portfolio() {
                       ${
                         proyecto.estado === 'En construcción'
                           ? 'bg-yellow-500/10 text-yellow-300 border border-yellow-300/30'
+                        : proyecto.estado === 'Desplegado'
+                          ? 'bg-green-500/10 text-green-300 border border-green-300/30'
                           : 'bg-white/10 text-white'
                       }`}
                   >
@@ -105,7 +111,7 @@ export default function Portfolio() {
                 </div>
                 <p className="text-gray-300 text-sm mb-4">{proyecto.descripcion}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
                   {['Next.js', 'Tailwind', 'Node.js'].map((tech, i) => (
                     <span
                       key={i}
@@ -125,7 +131,7 @@ export default function Portfolio() {
             href="#contacto"
             className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 hover:scale-105 transition-transform duration-300"
           >
-            Contáctanos para primeros proyectos
+            Contáctanos para iniciar tu proyecto
           </a>
         </div>
       </div>

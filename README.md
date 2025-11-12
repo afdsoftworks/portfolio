@@ -4,7 +4,7 @@ Bienvenidos al portafolio oficial de **AFDSoftworks**.
 Este sitio fue creado con el objetivo de mostrar quiénes somos, qué hacemos y cómo trabajamos como equipo de desarrollo web.
 
 ## 🚀 Tecnologías utilizadas
-
+ 
 - [Next.js](https://nextjs.org/) – Framework React moderno
 - [Tailwind CSS](https://tailwindcss.com/) – Framework CSS utility-first
 - [Vercel](https://vercel.com/) – Deploy automático y hosting

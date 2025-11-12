@@ -20,8 +20,8 @@ export default function Portfolio() {
       descripcion:
         'Encuentra tu próxima máquina perfecta: amplio catálogo, filtros intuitivos y opciones de financiamiento para que estrenes vehículo sin complicaciones.',
       imagen: '/portfolio/autoclick.jpg',
-      estado: 'En construcción', // cambiar estado, admite "En construcción" & "Desplegado".
-      href: '#',
+      estado: 'Desplegado',
+      href: 'https://autoclick.com.uy',
     },
     {
       id: 3,
@@ -31,6 +31,15 @@ export default function Portfolio() {
       imagen: '/portfolio/aerofest.jpg',
       estado: 'En construcción',
       href: '',
+    },
+    {
+      id: 4,
+      nombre: 'Made Bylu',
+      descripcion:
+        'Descubre piezas únicas y hechas con amor: ropa y accesorios artesanales diseñados y confeccionados a mano con materiales de calidad, donde cada creación cuenta una historia y refleja el cuidado por los detalles.',
+      imagen: '/portfolio/imgMadeByLu.png',
+      estado: 'Desplegado',
+      href: 'https://madebylu.site',
     },
   ]
 

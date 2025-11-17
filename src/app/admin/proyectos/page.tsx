@@ -7,6 +7,8 @@ import { Project } from '@/types/project'
 import { FiPlus, FiEdit, FiTrash2, FiExternalLink, FiLoader } from 'react-icons/fi'
 import Image from 'next/image'
 
+export const dynamic = 'force-dynamic'
+
 export default function ProyectosPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)

@@ -46,11 +46,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://afdsoftworks.com',
   },
-  icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
-  },
+  // Next.js App Router automatically handles icons in src/app/
+  // favicon.ico, apple-icon.png, icon0.svg, icon1.png
   verification: {
     google: '', // Agregar tu código de verificación de Google Search Console aquí
   },

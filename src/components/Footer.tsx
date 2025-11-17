@@ -22,14 +22,22 @@ export default function Footer() {
           {/* Logo and description */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-12 h-12 relative">
-                <Image
-                  src="/afd-logo.png"
-                  alt="AFD Softworks"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain"
-                />
+              <div
+                className="w-10 h-10 relative rounded-full flex items-center justify-center p-1"
+                style={{
+                  background: 'var(--cream-light)',
+                  border: '1px solid rgba(245, 241, 232, 0.2)'
+                }}
+              >
+                <div className="w-16 h-16 relative">
+                  <Image
+                    src="/afd-logo.png"
+                    alt="AFD Softworks"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               </div>
               <span
                 className="text-xl font-bold"

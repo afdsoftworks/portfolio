@@ -3,7 +3,7 @@
 import { ContactForm } from '@/components/ContactForm'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiMail, FiPhone, FiGithub } from 'react-icons/fi'
+import { FiMail, FiPhone, FiGithub, FiInstagram } from 'react-icons/fi'
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -68,7 +68,7 @@ export default function Contact() {
           initial={{ y: 20 }}
           animate={inView ? { y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="mt-16 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          className="mt-16 grid md:grid-cols-4 gap-6 max-w-5xl mx-auto"
         >
           <div
             className="p-6 rounded-xl text-center transition-all duration-300 hover:shadow-lg"
@@ -163,6 +163,42 @@ export default function Contact() {
             </h3>
             <a
               href="https://github.com/afdsoftworks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200"
+              style={{
+                fontFamily: 'var(--font-inter)',
+                color: 'var(--blue-accent)',
+                fontSize: '0.95rem'
+              }}
+            >
+              @afdsoftworks
+            </a>
+          </div>
+
+          <div
+            className="p-6 rounded-xl text-center transition-all duration-300 hover:shadow-lg"
+            style={{
+              background: 'var(--white)',
+              border: '1px solid rgba(59, 90, 125, 0.1)',
+              boxShadow: '0 2px 8px var(--shadow-soft)'
+            }}
+          >
+            <FiInstagram
+              className="mx-auto mb-3 text-3xl"
+              style={{ color: 'var(--blue-accent)' }}
+            />
+            <h3
+              className="text-lg font-semibold mb-2"
+              style={{
+                fontFamily: 'var(--font-playfair)',
+                color: 'var(--text-dark)'
+              }}
+            >
+              Instagram
+            </h3>
+            <a
+              href="https://instagram.com/afdsoftworks"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors duration-200"

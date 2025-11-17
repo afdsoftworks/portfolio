@@ -12,7 +12,7 @@ const formSchema = z.object({
   email: z.string().email({ message: 'Email inválido' }),
   message: z.string().min(10, { message: 'Mensaje muy corto' }).max(500),
   phone: z.string().optional(),
-  service: z.enum(['web', 'mobile', 'consulting', 'other'])
+  service: z.enum(['web', 'mobile', 'consulting', 'portfolio', 'custom', 'other'])
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -203,7 +203,8 @@ const {
             <option value="mobile">Landing Page</option>
             <option value="consulting">Sitio Corporativo</option>
             <option value="portfolio">Portfolio / Marca Personal</option>
-            <option value="other">Sitio a Medida</option>
+            <option value="custom">Sitio a Medida</option>
+            <option value="other">Otro tipo de Proyecto</option>
           </select>
         </div>
 

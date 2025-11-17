@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiGithub, FiArrowUp } from 'react-icons/fi'
+import { FiGithub, FiArrowUp, FiInstagram } from 'react-icons/fi'
+import Image from 'next/image'
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -21,28 +22,20 @@ export default function Footer() {
           {/* Logo and description */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center"
-                style={{
-                  background: 'var(--cream-light)',
-                  border: '2px solid var(--white)'
-                }}
-              >
-                <span
-                  className="font-bold italic text-sm"
-                  style={{
-                    fontFamily: 'var(--font-playfair)',
-                    color: 'var(--navy-dark)'
-                  }}
-                >
-                  Afd
-                </span>
+              <div className="w-12 h-12 relative">
+                <Image
+                  src="/afd-logo.png"
+                  alt="AFD Softworks"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span
                 className="text-xl font-bold"
                 style={{ fontFamily: 'var(--font-playfair)' }}
               >
-                AFD
+                AFD Softworks
               </span>
             </div>
             <p
@@ -56,27 +49,46 @@ export default function Footer() {
             >
               Creamos sitios web modernos que funcionan. Desarrollo profesional desde Uruguay.
             </p>
-            <a
-              href="https://github.com/afdsoftworks"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 transition-colors duration-200"
-              style={{
-                fontFamily: 'var(--font-inter)',
-                color: 'rgba(245, 241, 232, 0.8)',
-                fontSize: '0.9rem'
-              }}
-            >
-              <FiGithub className="text-lg" />
-              @afdsoftworks
-            </a>
+            <div className="flex flex-col gap-2">
+              <a
+                href="https://github.com/afdsoftworks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition-colors duration-200 hover:opacity-100"
+                style={{
+                  fontFamily: 'var(--font-inter)',
+                  color: 'rgba(245, 241, 232, 0.8)',
+                  fontSize: '0.9rem'
+                }}
+              >
+                <FiGithub className="text-lg" />
+                @afdsoftworks
+              </a>
+              <a
+                href="https://instagram.com/afdsoftworks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition-colors duration-200 hover:opacity-100"
+                style={{
+                  fontFamily: 'var(--font-inter)',
+                  color: 'rgba(245, 241, 232, 0.8)',
+                  fontSize: '0.9rem'
+                }}
+              >
+                <FiInstagram className="text-lg" />
+                @afdsoftworks
+              </a>
+            </div>
           </div>
 
           {/* Links */}
           <div>
             <h4
               className="text-lg font-semibold mb-4"
-              style={{ fontFamily: 'var(--font-playfair)' }}
+              style={{
+                fontFamily: 'var(--font-playfair)',
+                color: 'var(--white)'
+              }}
             >
               Enlaces
             </h4>
@@ -103,7 +115,10 @@ export default function Footer() {
           <div>
             <h4
               className="text-lg font-semibold mb-4"
-              style={{ fontFamily: 'var(--font-playfair)' }}
+              style={{
+                fontFamily: 'var(--font-playfair)',
+                color: 'var(--white)'
+              }}
             >
               Contacto
             </h4>

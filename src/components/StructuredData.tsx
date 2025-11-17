@@ -15,10 +15,12 @@ export default function StructuredData() {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
+      "telephone": "+598 92 480 589",
       "availableLanguage": ["Spanish"]
     },
     "sameAs": [
-      // Agregar tus redes sociales aquí cuando las tengas
+      "https://instagram.com/afdsoftworks",
+      "https://github.com/afdsoftworks"
     ]
   }
 
@@ -28,7 +30,7 @@ export default function StructuredData() {
     "name": "AFD Softworks",
     "image": "https://afdsoftworks.com/favicon.png",
     "url": "https://afdsoftworks.com",
-    "telephone": "", // Agregar teléfono si está disponible
+    "telephone": "+598 92 480 589",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",

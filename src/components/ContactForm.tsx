@@ -57,98 +57,203 @@ const {
   return (
     <div className="max-w-2xl mx-auto">
       {isSuccess && (
-        <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center">
-          <FiCheckCircle className="text-green-500 mr-2" />
-          <span className="text-green-300">¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.</span>
+        <div
+          className="mb-6 p-4 rounded-lg flex items-center"
+          style={{
+            background: 'rgba(34, 197, 94, 0.1)',
+            border: '1px solid rgba(34, 197, 94, 0.3)'
+          }}
+        >
+          <FiCheckCircle
+            className="mr-2"
+            style={{ color: '#16a34a', fontSize: '1.25rem' }}
+          />
+          <span
+            style={{
+              fontFamily: 'var(--font-inter)',
+              color: '#16a34a'
+            }}
+          >
+            ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
+          </span>
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium mb-2"
+              style={{
+                fontFamily: 'var(--font-inter)',
+                color: 'var(--text-dark)'
+              }}
+            >
               Nombre completo *
             </label>
             <input
               id="name"
               {...register('name')}
               type="text"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full rounded-lg px-4 py-3 transition-all duration-200"
+              style={{
+                background: 'var(--cream-light)',
+                border: '1.5px solid rgba(59, 90, 125, 0.15)',
+                fontFamily: 'var(--font-inter)',
+                color: 'var(--text-dark)'
+              }}
               disabled={isSubmitting}
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
+              <p
+                className="mt-1 text-sm"
+                style={{ color: '#dc2626' }}
+              >
+                {errors.name.message}
+              </p>
             )}
           </div>
-          
+
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium mb-2"
+              style={{
+                fontFamily: 'var(--font-inter)',
+                color: 'var(--text-dark)'
+              }}
+            >
               Email *
             </label>
             <input
               id="email"
               {...register('email')}
               type="email"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full rounded-lg px-4 py-3 transition-all duration-200"
+              style={{
+                background: 'var(--cream-light)',
+                border: '1.5px solid rgba(59, 90, 125, 0.15)',
+                fontFamily: 'var(--font-inter)',
+                color: 'var(--text-dark)'
+              }}
               disabled={isSubmitting}
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
+              <p
+                className="mt-1 text-sm"
+                style={{ color: '#dc2626' }}
+              >
+                {errors.email.message}
+              </p>
             )}
           </div>
         </div>
-        
+
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium mb-2"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
+          >
             Teléfono (opcional)
           </label>
           <input
             id="phone"
             {...register('phone')}
             type="tel"
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full rounded-lg px-4 py-3 transition-all duration-200"
+            style={{
+              background: 'var(--cream-light)',
+              border: '1.5px solid rgba(59, 90, 125, 0.15)',
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
             disabled={isSubmitting}
           />
         </div>
-        
+
         <div>
-          <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="service"
+            className="block text-sm font-medium mb-2"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
+          >
             ¿Qué servicio te interesa? *
           </label>
           <select
             id="service"
             {...register('service')}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full rounded-lg px-4 py-3 transition-all duration-200"
+            style={{
+              background: 'var(--cream-light)',
+              border: '1.5px solid rgba(59, 90, 125, 0.15)',
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
             disabled={isSubmitting}
           >
-            <option value="web">Desarrollo Web</option>
-            <option value="mobile">Aplicaciones Móviles</option>
-            <option value="consulting">Consultoría</option>
-            <option value="other">Otro</option>
+            <option value="web">E-commerce</option>
+            <option value="mobile">Landing Page</option>
+            <option value="consulting">Sitio Corporativo</option>
+            <option value="portfolio">Portfolio / Marca Personal</option>
+            <option value="other">Sitio a Medida</option>
           </select>
         </div>
-        
+
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium mb-2"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
+          >
             Mensaje *
           </label>
           <textarea
             id="message"
             {...register('message')}
             rows={5}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full rounded-lg px-4 py-3 transition-all duration-200 resize-none"
+            style={{
+              background: 'var(--cream-light)',
+              border: '1.5px solid rgba(59, 90, 125, 0.15)',
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-dark)'
+            }}
             disabled={isSubmitting}
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>
+            <p
+              className="mt-1 text-sm"
+              style={{ color: '#dc2626' }}
+            >
+              {errors.message.message}
+            </p>
           )}
         </div>
-        
-        <div>
+
+        <div className="pt-2">
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`inline-flex items-center justify-center w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-full shadow-lg transition-all ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-105'}`}
+            className={`inline-flex items-center justify-center w-full md:w-auto font-semibold px-8 py-4 rounded-full transition-all duration-300 ${
+              isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:scale-105 hover:shadow-xl'
+            }`}
+            style={{
+              background: 'var(--blue-accent)',
+              color: 'var(--white)',
+              fontFamily: 'var(--font-inter)',
+              boxShadow: '0 6px 20px rgba(74, 122, 184, 0.3)'
+            }}
           >
             {isSubmitting ? (
               <>

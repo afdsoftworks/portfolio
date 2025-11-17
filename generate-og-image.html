@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate OG Image - AFD Softworks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f0f0f0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .og-container {
+            background: #F5F1E8;
+            width: 1200px;
+            height: 630px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            width: 350px;
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        .tagline {
+            font-size: 42px;
+            font-style: italic;
+            color: #3B5A7D;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            text-align: center;
+            max-width: 900px;
+            line-height: 1.3;
+        }
+
+        .instructions {
+            margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 1200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .instructions h2 {
+            color: #3B5A7D;
+            margin-bottom: 20px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .instructions code {
+            background: #f5f5f5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #4A7AB8;
+        }
+
+        .button {
+            display: inline-block;
+            background: #4A7AB8;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .button:hover {
+            background: #3B5A7D;
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .instructions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container" id="og-image">
+        <img src="public/afd-logo.png" alt="AFD Softworks Logo" class="logo">
+        <div class="tagline">Sitios web modernos que funcionan</div>
+    </div>
+
+    <div class="instructions">
+        <h2>📸 Instrucciones para Capturar la Imagen OG</h2>
+
+        <h3 style="margin: 20px 0 10px 0;">Opción 1: Screenshot Manual (Rápido)</h3>
+        <ol>
+            <li>Haz zoom al 100% en tu navegador (Ctrl/Cmd + 0)</li>
+            <li>Haz click derecho en el cuadro gris arriba</li>
+            <li>Selecciona "Inspeccionar" / "Inspect"</li>
+            <li>En las DevTools, busca el elemento <code>&lt;div class="og-container"&gt;</code></li>
+            <li>Click derecho en ese elemento → "Capture node screenshot"</li>
+            <li>Guarda la imagen como <code>og-image.png</code> en la carpeta <code>public/</code></li>
+        </ol>
+
+        <h3 style="margin: 20px 0 10px 0;">Opción 2: Canva (Más control)</h3>
+        <ol>
+            <li>Abre <a href="https://www.canva.com/" target="_blank" class="button" style="display: inline; padding: 4px 12px; margin: 0 4px;">Ir a Canva</a></li>
+            <li>Crea un diseño personalizado de <strong>1200 x 630 px</strong></li>
+            <li>Fondo color: <code>#F5F1E8</code></li>
+            <li>Sube el logo <code>public/afd-logo.png</code></li>
+            <li>Agrega el texto: "Sitios web modernos que funcionan" en color <code>#3B5A7D</code></li>
+            <li>Descarga como PNG</li>
+            <li>Guarda como <code>public/og-image.png</code></li>
+        </ol>
+
+        <h3 style="margin: 20px 0 10px 0;">Opción 3: Figma (Profesional)</h3>
+        <ol>
+            <li>Crea un frame de 1200 x 630 px</li>
+            <li>Importa el logo y agrega el texto</li>
+            <li>Exporta como PNG @ 2x quality</li>
+            <li>Guarda como <code>public/og-image.png</code></li>
+        </ol>
+
+        <h3 style="margin: 20px 0 10px 0;">✅ Validar la Imagen</h3>
+        <p>Una vez creada, valida que se vea bien en:</p>
+        <ul style="list-style: none; margin-top: 10px;">
+            <li>• <a href="https://www.opengraph.xyz/" target="_blank" style="color: #4A7AB8;">OpenGraph.xyz</a></li>
+            <li>• <a href="https://developers.facebook.com/tools/debug/" target="_blank" style="color: #4A7AB8;">Facebook Debugger</a></li>
+            <li>• <a href="https://cards-dev.twitter.com/validator" target="_blank" style="color: #4A7AB8;">Twitter Card Validator</a></li>
+        </ul>
+    </div>
+</body>
+</html>

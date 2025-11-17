@@ -1,8 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import { FiCode } from 'react-icons/fi'
+import { FiCode, FiExternalLink } from 'react-icons/fi'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { useSectionNavigation } from '@/hooks/useSectionNavigation'
 
 export default function Portfolio() {
+  const { navigateToSection } = useSectionNavigation()
   // proyectos “reales”
   const base = [
     {
@@ -60,89 +66,221 @@ export default function Portfolio() {
   )
 
   const proyectos = [...base, ...placeholders]
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  })
 
   return (
-    <section id="proyectos" className="py-20 px-6 bg-white/5">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Nuestro <span className="text-purple-300">Portafolio</span>
+    <section
+      id="proyectos"
+      className="py-24 px-6"
+      style={{ background: 'var(--cream-primary)' }}
+    >
+      <div className="container mx-auto max-w-6xl" ref={ref}>
+        {/* Header */}
+        <motion.div
+          initial={{ y: 20 }}
+          animate={inView ? { y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <h2
+            className="mb-4 leading-tight"
+            style={{
+              fontFamily: 'var(--font-playfair)',
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              color: 'var(--text-dark)',
+              fontWeight: 700
+            }}
+          >
+            Proyectos{' '}
+            <span style={{ fontStyle: 'italic', color: 'var(--blue-accent)' }}>
+              destacados
+            </span>
           </h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Pronto estarán disponibles ejemplos de nuestros trabajos
+          <p
+            className="max-w-2xl mx-auto"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              color: 'var(--text-gray)',
+              fontSize: '1.125rem'
+            }}
+          >
+            Soluciones digitales que transforman ideas en experiencias reales
           </p>
-        </div>
+        </motion.div>
 
+        {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {proyectos.map((proyecto) => (
-            <Link
+          {proyectos.map((proyecto, index) => (
+            <motion.div
               key={proyecto.id}
-              href={proyecto.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl border border-white/10
-                         hover:border-purple-300/30 transition-all duration-300
-                         flex flex-col h-full"
+              initial={{ y: 30 }}
+              animate={inView ? { y: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
             >
-              <div className="w-full h-56 md:h-64 lg:h-72 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 flex items-center justify-center overflow-hidden">
-                {proyecto.imagen ? (
-                  <Image
-                    src={proyecto.imagen}
-                    alt={proyecto.nombre}
-                    width={800}
-                    height={534}
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <div className="text-center p-6">
-                    <FiCode className="mx-auto text-4xl text-white/30 mb-3" />
-                    <p className="text-white/50 font-medium">Proyecto en desarrollo</p>
-                    <p className="text-xs text-white/30 mt-2">Disponible pronto</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-6 bg-gradient-to-b from-white/5 to-white/10 flex flex-col flex-1">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold">{proyecto.nombre}</h3>
-                  <span
-                    className={`text-xs px-2 py-1 rounded-full
-                      ${
-                        proyecto.estado === 'En construcción'
-                          ? 'bg-yellow-500/10 text-yellow-300 border border-yellow-300/30'
-                        : proyecto.estado === 'Desplegado'
-                          ? 'bg-green-500/10 text-green-300 border border-green-300/30'
-                          : 'bg-white/10 text-white'
-                      }`}
-                  >
-                    {proyecto.estado}
-                  </span>
+              <Link
+                href={proyecto.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-xl flex flex-col h-full transition-all duration-300 hover:shadow-xl"
+                style={{
+                  background: 'var(--white)',
+                  border: '1px solid rgba(59, 90, 125, 0.1)',
+                  boxShadow: '0 2px 8px var(--shadow-soft)'
+                }}
+              >
+                {/* Image */}
+                <div
+                  className="w-full h-56 md:h-64 flex items-center justify-center overflow-hidden relative"
+                  style={{ background: 'var(--cream-light)' }}
+                >
+                  {proyecto.imagen ? (
+                    <>
+                      <Image
+                        src={proyecto.imagen}
+                        alt={proyecto.nombre}
+                        width={800}
+                        height={534}
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {/* Overlay on hover */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                        style={{
+                          background: 'rgba(59, 90, 125, 0.9)'
+                        }}
+                      >
+                        <FiExternalLink
+                          className="text-4xl"
+                          style={{ color: 'var(--white)' }}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center p-6">
+                      <FiCode
+                        className="mx-auto text-4xl mb-3"
+                        style={{ color: 'var(--navy-light)', opacity: 0.3 }}
+                      />
+                      <p
+                        className="font-medium"
+                        style={{
+                          fontFamily: 'var(--font-inter)',
+                          color: 'var(--text-gray)',
+                          opacity: 0.6
+                        }}
+                      >
+                        Proyecto en desarrollo
+                      </p>
+                      <p
+                        className="text-xs mt-2"
+                        style={{
+                          fontFamily: 'var(--font-inter)',
+                          color: 'var(--text-gray)',
+                          opacity: 0.4
+                        }}
+                      >
+                        Disponible pronto
+                      </p>
+                    </div>
+                  )}
                 </div>
-                <p className="text-gray-300 text-sm mb-4">{proyecto.descripcion}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
-                  {['Next.js', 'Tailwind', 'Node.js'].map((tech, i) => (
-                    <span
-                      key={i}
-                      className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10"
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3
+                      className="text-xl font-bold"
+                      style={{
+                        fontFamily: 'var(--font-playfair)',
+                        color: 'var(--text-dark)'
+                      }}
                     >
-                      {tech}
+                      {proyecto.nombre}
+                    </h3>
+                    <span
+                      className="text-xs px-2.5 py-1 rounded-full"
+                      style={{
+                        fontFamily: 'var(--font-inter)',
+                        ...(proyecto.estado === 'En construcción'
+                          ? {
+                              background: 'rgba(234, 179, 8, 0.1)',
+                              color: '#ca8a04',
+                              border: '1px solid rgba(234, 179, 8, 0.3)'
+                            }
+                          : proyecto.estado === 'Desplegado'
+                          ? {
+                              background: 'rgba(34, 197, 94, 0.1)',
+                              color: '#16a34a',
+                              border: '1px solid rgba(34, 197, 94, 0.3)'
+                            }
+                          : {
+                              background: 'var(--cream-light)',
+                              color: 'var(--text-gray)',
+                              border: '1px solid rgba(59, 90, 125, 0.1)'
+                            })
+                      }}
+                    >
+                      {proyecto.estado}
                     </span>
-                  ))}
+                  </div>
+                  <p
+                    className="text-sm mb-4 flex-1"
+                    style={{
+                      fontFamily: 'var(--font-inter)',
+                      color: 'var(--text-gray)',
+                      lineHeight: '1.6'
+                    }}
+                  >
+                    {proyecto.descripcion}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {['Next.js', 'Tailwind', 'Node.js'].map((tech, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-2.5 py-1 rounded-full"
+                        style={{
+                          fontFamily: 'var(--font-inter)',
+                          background: 'var(--cream-light)',
+                          color: 'var(--navy-dark)',
+                          border: '1px solid rgba(59, 90, 125, 0.15)'
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <a
-            href="#contacto"
-            className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 hover:scale-105 transition-transform duration-300"
+        {/* CTA */}
+        <motion.div
+          initial={{ y: 20 }}
+          animate={inView ? { y: 0 } : {}}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="text-center mt-16"
+        >
+          <motion.button
+            onClick={() => navigateToSection('/contacto')}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center justify-center font-semibold px-8 py-3 rounded-full transition-all duration-300"
+            style={{
+              background: 'var(--blue-accent)',
+              color: 'var(--white)',
+              fontFamily: 'var(--font-inter)',
+              boxShadow: '0 6px 20px rgba(74, 122, 184, 0.25)'
+            }}
           >
-            Contáctanos para iniciar tu proyecto
-          </a>
-        </div>
+            Iniciar mi proyecto
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   )

@@ -7,9 +7,12 @@ import Services from '@/components/Services'
 import Portfolio from '@/components/Portfolio';
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import DecorativeElements from '@/components/DecorativeElements'
+import { useSectionNavigation } from '@/hooks/useSectionNavigation'
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
+  useSectionNavigation() // Initialize section navigation
 
   useEffect(() => {
     document.title = 'AFDSoftworks | Soluciones digitales a medida'
@@ -23,13 +26,16 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900 text-white">
-      <Navbar isScrolled={isScrolled} />
-      <Hero />
-      <Services />
-      <Portfolio />
-      <Contact />
-      <Footer />
+    <div className="min-h-screen relative" style={{ background: 'var(--cream-primary)', color: 'var(--text-dark)' }}>
+      <DecorativeElements />
+      <div className="relative z-10">
+        <Navbar isScrolled={isScrolled} />
+        <Hero />
+        <Services />
+        <Portfolio />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   )
 }

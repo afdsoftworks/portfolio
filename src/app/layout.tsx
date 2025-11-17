@@ -1,21 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import StructuredData from "@/components/StructuredData";
 
 // app/layout.tsx
 
 export const metadata: Metadata = {
-  title: 'AFDSoftworks | Portafolio y Soluciones Digitales',
-  description: 'Desarrollo web a medida: Next.js, Tailwind y Node.js. Conocé nuestros proyectos y servicios.',
-  keywords: ['desarrollo web', 'Next.js', 'Tailwind', 'Node.js', 'AFDSoftworks', 'Uruguay'],
-  authors: [{ name: 'AFDSoftworks' }],
+  title: 'AFD | Sitios web modernos que funcionan',
+  description: 'Creamos e-commerce, landing pages, sitios corporativos y portfolios. Desarrollo web profesional a medida en Uruguay.',
+  keywords: ['desarrollo web', 'e-commerce', 'landing pages', 'sitios corporativos', 'portfolios', 'AFD', 'Uruguay', 'desarrollo web uruguay', 'programación web'],
+  authors: [{ name: 'AFD' }],
   openGraph: {
-    title: 'AFDSoftworks | Portafolio',
-    description: 'Conocé nuestros proyectos y servicios.',
-    url: 'https://tudominio.com',
-    siteName: 'AFDSoftworks',
+    title: 'AFD | Sitios web modernos que funcionan',
+    description: 'Creamos e-commerce, landing pages, sitios corporativos y portfolios. Desarrollo web profesional.',
+    url: 'https://afdsoftworks.com',
+    siteName: 'AFD Softworks',
     locale: 'es_UY',
     type: 'website',
+    images: [
+      {
+        url: 'https://afdsoftworks.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'AFD Softworks - Desarrollo Web Profesional',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AFD | Sitios web modernos que funcionan',
+    description: 'Desarrollo web profesional - E-commerce, landing pages y más',
+    images: ['https://afdsoftworks.com/og-image.png'],
   },
   robots: {
     index: true,
@@ -28,22 +43,32 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-    icons: {
+  alternates: {
+    canonical: 'https://afdsoftworks.com',
+  },
+  icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
+  verification: {
+    google: '', // Agregar tu código de verificación de Google Search Console aquí
+  },
 }
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ['400', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
 });
 
 export default function RootLayout({
@@ -52,9 +77,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
+      <head>
+        <StructuredData />
+        <link
+          rel="preload"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap"
+          as="style"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="theme-color" content="#F5F1E8" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${playfair.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,9 +1,10 @@
 # Tareas SEO Pendientes (Manuales)
 
-## 🎨 Crear Imagen Open Graph ✅ PREPARADO
+## 🎨 Crear Imagen Open Graph ✅ COMPLETADO
 
-**Urgencia**: Alta
-**Archivo necesario**: `/public/og-image.png`
+**Estado**: ✅ Imagen creada y configurada
+**Archivo**: `/public/og-image.png` (45KB, 1200x630px)
+**Configurado en**: `src/app/layout.tsx`
 
 **OPCIÓN RÁPIDA**:
 Abre el archivo `generate-og-image.html` en tu navegador y sigue las instrucciones para capturar la imagen.
@@ -77,25 +78,19 @@ Después de crear la imagen, verifica en:
 
 ---
 
-## 🌐 Datos de Contacto en Schema.org
+## 🌐 Datos de Contacto en Schema.org ✅ COMPLETADO
 
+**Estado**: ✅ Teléfono y redes sociales agregados
 **Archivo**: `src/components/StructuredData.tsx`
 
-Actualizar los siguientes campos con información real:
+**Completado**:
+- ✅ Teléfono: "+598 92 480 589"
+- ✅ Instagram: https://instagram.com/afdsoftworks
+- ✅ GitHub: https://github.com/afdsoftworks
 
-**Líneas a completar**:
-- Línea 18: `"telephone": ""`  → Agregar teléfono de contacto
-- Líneas 21-23: `"sameAs": []` → Agregar redes sociales (Instagram, Facebook, LinkedIn, Twitter)
-
-**Ejemplo**:
-```typescript
-"telephone": "+598 99 123 456",
-"sameAs": [
-  "https://www.instagram.com/afdsoftworks",
-  "https://www.linkedin.com/company/afdsoftworks",
-  "https://www.facebook.com/afdsoftworks"
-]
-```
+**Configurado en**:
+- Organization schema (contactPoint.telephone + sameAs)
+- LocalBusiness schema (telephone)
 
 ---
 
@@ -143,15 +138,15 @@ Verificar que todos los schemas (Organization, LocalBusiness, Service) se lean c
 
 ## ✅ Checklist Post-Deploy
 
-- [ ] Crear imagen Open Graph (og-image.png)
+- [x] Crear imagen Open Graph (og-image.png) ✅
 - [ ] Verificar sitio en Google Search Console
 - [ ] Agregar código de verificación de Google
 - [ ] Enviar sitemap en Search Console
-- [ ] Completar datos de contacto en Schema.org
-- [ ] Agregar redes sociales en Schema.org
+- [x] Completar datos de contacto en Schema.org ✅
+- [x] Agregar redes sociales en Schema.org ✅
 - [ ] Configurar Google Analytics (opcional)
 - [ ] Configurar Microsoft Clarity (opcional)
-- [ ] Optimizar imágenes (favicon, portfolio)
+- [ ] Optimizar imágenes (favicon 55KB→20KB, logo 58KB→20KB) - Usar TinyPNG/Squoosh
 - [ ] Ejecutar Lighthouse audit
 - [ ] Validar Rich Results
 - [ ] Probar compartir en redes sociales

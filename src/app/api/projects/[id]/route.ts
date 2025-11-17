@@ -34,10 +34,10 @@ export async function GET(
     }
 
     return NextResponse.json({ project })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching project:', error)
     return NextResponse.json(
-      { error: 'Error al obtener proyecto', message: error.message },
+      { error: 'Error al obtener proyecto', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -61,7 +61,7 @@ export async function PUT(
       )
     }
 
-    const body: ProjectUpdateInput = await request.json()
+    const body = await request.json() as ProjectUpdateInput
 
     const { data: project, error } = await supabase
       .from('projects')
@@ -73,10 +73,10 @@ export async function PUT(
     if (error) throw error
 
     return NextResponse.json({ project })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating project:', error)
     return NextResponse.json(
-      { error: 'Error al actualizar proyecto', message: error.message },
+      { error: 'Error al actualizar proyecto', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -108,10 +108,10 @@ export async function DELETE(
     if (error) throw error
 
     return NextResponse.json({ message: 'Proyecto eliminado' })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error deleting project:', error)
     return NextResponse.json(
-      { error: 'Error al eliminar proyecto', message: error.message },
+      { error: 'Error al eliminar proyecto', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

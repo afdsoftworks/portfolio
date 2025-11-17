@@ -3,20 +3,11 @@
  * Sincronizados con la tabla 'projects' de Supabase
  */
 
+import { Database } from './database'
+
 export type ProjectStatus = 'Desplegado' | 'En Construcción' | 'Próximamente'
 
-export interface Project {
-  id: string
-  title: string
-  description: string
-  status: ProjectStatus
-  image_url: string | null
-  link: string | null
-  tags: string[]
-  order: number
-  created_at: string
-  updated_at: string
-}
+export type Project = Database['public']['Tables']['projects']['Row']
 
 export interface ProjectFormData {
   title: string
@@ -27,13 +18,9 @@ export interface ProjectFormData {
   tags: string[]
 }
 
-export interface ProjectCreateInput extends ProjectFormData {
-  order?: number
-}
+export type ProjectCreateInput = Database['public']['Tables']['projects']['Insert']
 
-export interface ProjectUpdateInput extends Partial<ProjectFormData> {
-  order?: number
-}
+export type ProjectUpdateInput = Database['public']['Tables']['projects']['Update']
 
 // Para el formulario con archivo de imagen
 export interface ProjectFormWithImage extends ProjectFormData {

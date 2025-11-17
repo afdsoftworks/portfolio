@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const filePath = `projects/${fileName}`
 
     // Subir a Supabase Storage
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('project-images')
       .upload(filePath, file, {
         contentType: file.type,
@@ -72,10 +72,10 @@ export async function POST(request: NextRequest) {
       url: publicUrl,
       path: filePath,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error uploading file:', error)
     return NextResponse.json(
-      { error: 'Error al subir archivo', message: error.message },
+      { error: 'Error al subir archivo', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -111,10 +111,10 @@ export async function DELETE(request: NextRequest) {
     if (error) throw error
 
     return NextResponse.json({ message: 'Archivo eliminado' })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error deleting file:', error)
     return NextResponse.json(
-      { error: 'Error al eliminar archivo', message: error.message },
+      { error: 'Error al eliminar archivo', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

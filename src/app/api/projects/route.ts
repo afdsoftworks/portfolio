@@ -24,10 +24,10 @@ export async function GET() {
       projects,
       total: projects?.length || 0,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching projects:', error)
     return NextResponse.json(
-      { error: 'Error al obtener proyectos', message: error.message },
+      { error: 'Error al obtener proyectos', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const body: ProjectCreateInput = await request.json()
+    const body = await request.json() as ProjectCreateInput
 
     // Obtener el último order para incrementar
     const { data: lastProject } = await supabase
@@ -71,10 +71,10 @@ export async function POST(request: NextRequest) {
     if (error) throw error
 
     return NextResponse.json({ project }, { status: 201 })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating project:', error)
     return NextResponse.json(
-      { error: 'Error al crear proyecto', message: error.message },
+      { error: 'Error al crear proyecto', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

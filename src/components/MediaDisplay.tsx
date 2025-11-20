@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Project } from '@/types/project'
 
@@ -20,24 +20,44 @@ export default function MediaDisplay({
   project,
   className = '',
   priority = false,
-  autoPlay = false, // Cambiado a false por defecto
-  loop = false, // Cambiado a false para mostrar thumbnail al terminar
+  autoPlay = false,
+  loop = false,
   muted = true,
   controls = false,
   width = 800,
   height = 534,
 }: MediaDisplayProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [hasError, setHasError] = useState(false)
   const [showPoster, setShowPoster] = useState(true)
 
-  // Manejar reproducción en hover
+  // Pausar video cuando sale del viewport (móvil)
+  useEffect(() => {
+    if (!containerRef.current || autoPlay) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && videoRef.current) {
+            videoRef.current.pause()
+            videoRef.current.currentTime = 0
+            setShowPoster(true)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [autoPlay])
+
+  // Manejar reproducción en hover (desktop)
   const handleMouseEnter = () => {
     if (videoRef.current && !autoPlay) {
       setShowPoster(false)
-      videoRef.current.play().catch(() => {
-        // Si falla el play, no hacer nada
-      })
+      videoRef.current.play().catch(() => {})
     }
   }
 
@@ -46,6 +66,14 @@ export default function MediaDisplay({
       videoRef.current.pause()
       videoRef.current.currentTime = 0
       setShowPoster(true)
+    }
+  }
+
+  // Manejar touch en móvil - inicia video al tocar
+  const handleTouchStart = () => {
+    if (videoRef.current && !autoPlay) {
+      setShowPoster(false)
+      videoRef.current.play().catch(() => {})
     }
   }
 
@@ -84,9 +112,11 @@ export default function MediaDisplay({
 
     return (
       <div
+        ref={containerRef}
         className="relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
       >
         <video
           ref={videoRef}

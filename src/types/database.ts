@@ -20,7 +20,11 @@ export type Database = {
           title: string
           description: string
           status: 'Desplegado' | 'En Construcción' | 'Próximamente'
+          media_type: 'image' | 'video'
           image_url: string | null
+          video_url: string | null
+          video_webm_url: string | null
+          video_poster: string | null
           link: string | null
           tags: string[]
           order: number
@@ -32,7 +36,11 @@ export type Database = {
           title: string
           description: string
           status: 'Desplegado' | 'En Construcción' | 'Próximamente'
+          media_type?: 'image' | 'video'
           image_url?: string | null
+          video_url?: string | null
+          video_webm_url?: string | null
+          video_poster?: string | null
           link?: string | null
           tags?: string[]
           order?: number
@@ -44,7 +52,11 @@ export type Database = {
           title?: string
           description?: string
           status?: 'Desplegado' | 'En Construcción' | 'Próximamente'
+          media_type?: 'image' | 'video'
           image_url?: string | null
+          video_url?: string | null
+          video_webm_url?: string | null
+          video_poster?: string | null
           link?: string | null
           tags?: string[]
           order?: number

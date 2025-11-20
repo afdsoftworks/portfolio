@@ -1,18 +1,18 @@
 /**
  * API Route: /api/upload
- * POST: Subir imagen a Supabase Storage
+ * POST: Subir imagen o video a Supabase Storage
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = createServiceClient()
+    const supabase = await createClient()
 
     // Verificar autenticación
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) {
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
       return NextResponse.json(
         { error: 'No autorizado' },
         { status: 401 }
@@ -29,20 +29,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validar tipo de archivo
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
-    if (!allowedTypes.includes(file.type)) {
+    // Validar tipo de archivo (imágenes y videos)
+    const allowedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+    const allowedVideoTypes = ['video/mp4', 'video/webm', 'video/quicktime']
+    const allAllowedTypes = [...allowedImageTypes, ...allowedVideoTypes]
+
+    if (!allAllowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Tipo de archivo no permitido. Solo JPG, PNG, WEBP' },
+        { error: 'Tipo de archivo no permitido. Solo JPG, PNG, WEBP, MP4, WEBM' },
         { status: 400 }
       )
     }
 
-    // Validar tamaño (máx 5MB)
-    const maxSize = 5 * 1024 * 1024 // 5MB
+    // Determinar si es imagen o video
+    const isVideo = allowedVideoTypes.includes(file.type)
+
+    // Validar tamaño según tipo de archivo
+    const maxSize = isVideo ? 50 * 1024 * 1024 : 5 * 1024 * 1024 // 50MB para videos, 5MB para imágenes
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: 'Archivo muy grande. Máximo 5MB' },
+        { error: `Archivo muy grande. Máximo ${isVideo ? '50MB' : '5MB'}` },
         { status: 400 }
       )
     }
@@ -52,7 +58,7 @@ export async function POST(request: NextRequest) {
     const fileName = `${timestamp}-${file.name.replace(/\s+/g, '-')}`
     const filePath = `projects/${fileName}`
 
-    // Subir a Supabase Storage
+    // Subir a Supabase Storage (usar mismo bucket para imágenes y videos)
     const { error } = await supabase.storage
       .from('project-images')
       .upload(filePath, file, {
@@ -81,14 +87,14 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// DELETE /api/upload - Eliminar imagen de Supabase Storage
+// DELETE /api/upload - Eliminar archivo de Supabase Storage
 export async function DELETE(request: NextRequest) {
   try {
-    const supabase = createServiceClient()
+    const supabase = await createClient()
 
     // Verificar autenticación
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) {
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
       return NextResponse.json(
         { error: 'No autorizado' },
         { status: 401 }

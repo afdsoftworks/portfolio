@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Sidebar from '@/components/admin/Sidebar'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -12,13 +12,20 @@ export default function AdminLayout({
 }) {
   const { user, loading } = useAuth()
   const router = useRouter()
+  const pathname = usePathname()
 
+  // Siempre llamar todos los hooks antes de cualquier return
   useEffect(() => {
-    // Si no está autenticado y no está cargando, redirigir al login
-    if (!loading && !user) {
+    // Solo redirigir si NO es la página de login
+    if (pathname !== '/admin/login' && !loading && !user) {
       router.push('/admin/login')
     }
-  }, [user, loading, router])
+  }, [user, loading, router, pathname])
+
+  // Si es la página de login, no aplicar el layout protegido
+  if (pathname === '/admin/login') {
+    return <>{children}</>
+  }
 
   // Mostrar loading mientras verifica autenticación
   if (loading) {

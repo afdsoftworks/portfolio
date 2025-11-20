@@ -60,7 +60,7 @@ export default function AdminLayout({
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--cream-light)' }}>
       <Sidebar />
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden pt-16 lg:pt-0">
         {children}
       </main>
     </div>

@@ -1,14 +1,30 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { FiFolder, FiMail, FiLogOut, FiUser } from 'react-icons/fi'
+import { FiFolder, FiMail, FiLogOut, FiUser, FiMenu, FiX } from 'react-icons/fi'
 import { useAuth } from '@/hooks/useAuth'
 
 export default function Sidebar() {
   const pathname = usePathname()
   const { user, signOut } = useAuth()
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Close sidebar on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
 
   const menuItems = [
     {
@@ -25,16 +41,43 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside
-      className="w-64 min-h-screen flex flex-col"
-      style={{
-        background: 'var(--navy-dark)',
-        borderRight: '1px solid rgba(245, 241, 232, 0.1)',
-      }}
-    >
-      {/* Logo */}
-      <div className="p-6 border-b" style={{ borderColor: 'rgba(245, 241, 232, 0.1)' }}>
-        <Link href="/admin/proyectos" className="flex items-center gap-3">
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 rounded-lg"
+        style={{
+          background: 'var(--navy-dark)',
+          color: 'var(--white)',
+        }}
+        aria-label="Abrir menú"
+      >
+        <FiMenu size={24} />
+      </button>
+
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <aside
+        className={`
+          fixed lg:relative inset-y-0 left-0 z-50
+          w-64 min-h-screen flex flex-col
+          transform transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+        style={{
+          background: 'var(--navy-dark)',
+          borderRight: '1px solid rgba(245, 241, 232, 0.1)',
+        }}
+      >
+        {/* Logo */}
+        <div className="p-6 border-b flex items-center justify-between" style={{ borderColor: 'rgba(245, 241, 232, 0.1)' }}>
+          <Link href="/admin/proyectos" className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center"
             style={{ background: 'var(--cream-light)' }}
@@ -68,7 +111,16 @@ export default function Sidebar() {
             </p>
           </div>
         </Link>
-      </div>
+          {/* Close button for mobile */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="lg:hidden p-1 rounded"
+            style={{ color: 'var(--white)' }}
+            aria-label="Cerrar menú"
+          >
+            <FiX size={20} />
+          </button>
+        </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4">
@@ -168,6 +220,7 @@ export default function Sidebar() {
           Cerrar sesión
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   )
 }

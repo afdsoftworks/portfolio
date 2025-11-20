@@ -179,7 +179,7 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
   const statusColors = getStatusColor(formData.status)
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
       {/* Formulario */}
       <form onSubmit={handleSubmit}>
         <div className="space-y-6">
@@ -226,9 +226,9 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
               <label className="block text-sm font-medium mb-2" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-dark)' }}>
                 Imagen del Proyecto
               </label>
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
                 {formData.image_url && (
-                  <div className="w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
+                  <div className="w-full sm:w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
                     <Image src={formData.image_url} alt="Preview" fill className="object-cover" />
                   </div>
                 )}
@@ -261,9 +261,9 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
                 <label className="block text-sm font-medium mb-2" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-dark)' }}>
                   Video MP4 (Requerido)
                 </label>
-                <div className="flex items-start gap-4">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
                   {formData.video_url && (
-                    <div className="w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
+                    <div className="w-full sm:w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
                       <video src={formData.video_url} className="w-full h-full object-cover" muted loop autoPlay playsInline />
                     </div>
                   )}
@@ -320,9 +320,9 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
                 <label className="block text-sm font-medium mb-2" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-dark)' }}>
                   Imagen Poster (Thumbnail del video)
                 </label>
-                <div className="flex items-start gap-4">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
                   {formData.video_poster && (
-                    <div className="w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
+                    <div className="w-full sm:w-48 h-32 relative rounded-lg overflow-hidden" style={{ background: 'var(--cream-light)' }}>
                       <Image src={formData.video_poster} alt="Poster" fill className="object-cover" />
                     </div>
                   )}
@@ -462,11 +462,11 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
           </div>
 
           {/* Botones */}
-          <div className="flex gap-3 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all w-full sm:w-auto"
               style={{
                 background: loading ? 'var(--cream-light)' : 'var(--blue-accent)',
                 color: loading ? 'var(--text-gray)' : 'var(--white)',
@@ -480,7 +480,7 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
             <button
               type="button"
               onClick={() => router.back()}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all w-full sm:w-auto"
               style={{
                 background: 'var(--cream-light)',
                 color: 'var(--text-dark)',
@@ -495,7 +495,7 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
       </form>
 
       {/* Vista Previa */}
-      <div className="lg:sticky lg:top-8 lg:self-start">
+      <div className="lg:sticky lg:top-8 lg:self-start order-first lg:order-last">
         <div className="mb-4">
           <h3 style={{ fontFamily: 'var(--font-playfair)', color: 'var(--text-dark)', fontSize: '1.25rem', fontWeight: 600 }}>
             Vista Previa

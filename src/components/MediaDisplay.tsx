@@ -21,7 +21,7 @@ export default function MediaDisplay({
   className = '',
   priority = false,
   autoPlay = false, // Cambiado a false por defecto
-  loop = true,
+  loop = false, // Cambiado a false para mostrar thumbnail al terminar
   muted = true,
   controls = false,
   width = 800,
@@ -29,10 +29,12 @@ export default function MediaDisplay({
 }: MediaDisplayProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasError, setHasError] = useState(false)
+  const [showPoster, setShowPoster] = useState(true)
 
   // Manejar reproducción en hover
   const handleMouseEnter = () => {
     if (videoRef.current && !autoPlay) {
+      setShowPoster(false)
       videoRef.current.play().catch(() => {
         // Si falla el play, no hacer nada
       })
@@ -42,7 +44,17 @@ export default function MediaDisplay({
   const handleMouseLeave = () => {
     if (videoRef.current && !autoPlay) {
       videoRef.current.pause()
-      videoRef.current.currentTime = 0 // Reiniciar al inicio
+      videoRef.current.currentTime = 0
+      setShowPoster(true)
+    }
+  }
+
+  const handleVideoEnded = () => {
+    if (!loop) {
+      setShowPoster(true)
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0
+      }
     }
   }
 
@@ -68,41 +80,50 @@ export default function MediaDisplay({
       )
     }
 
+    const posterUrl = project.video_poster || project.image_url
+
     return (
-      <video
-        ref={videoRef}
-        autoPlay={autoPlay}
-        loop={loop}
-        muted={muted}
-        playsInline
-        controls={controls}
-        poster={project.video_poster || project.image_url || undefined}
-        className={className}
-        onError={() => setHasError(true)}
+      <div
+        className="relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        preload="metadata"
       >
-        {/* WebM primero (mejor compresión) */}
-        {project.video_webm_url && (
-          <source src={project.video_webm_url} type="video/webm" />
+        <video
+          ref={videoRef}
+          autoPlay={autoPlay}
+          loop={loop}
+          muted={muted}
+          playsInline
+          controls={controls}
+          className={className}
+          onError={() => setHasError(true)}
+          onEnded={handleVideoEnded}
+          preload="metadata"
+        >
+          {/* WebM primero (mejor compresión) */}
+          {project.video_webm_url && (
+            <source src={project.video_webm_url} type="video/webm" />
+          )}
+          {/* MP4 como fallback (mayor compatibilidad) */}
+          {project.video_url && (
+            <source src={project.video_url} type="video/mp4" />
+          )}
+          Tu navegador no soporta el elemento video.
+        </video>
+        {/* Poster overlay */}
+        {posterUrl && showPoster && (
+          <div className="absolute inset-0">
+            <Image
+              src={posterUrl}
+              alt={project.title}
+              width={width}
+              height={height}
+              className={className}
+              priority={priority}
+            />
+          </div>
         )}
-        {/* MP4 como fallback (mayor compatibilidad) */}
-        {project.video_url && (
-          <source src={project.video_url} type="video/mp4" />
-        )}
-        {/* Fallback a imagen si el navegador no soporta video */}
-        {project.image_url && (
-          <Image
-            src={project.image_url}
-            alt={project.title}
-            width={width}
-            height={height}
-            className={className}
-          />
-        )}
-        Tu navegador no soporta el elemento video.
-      </video>
+      </div>
     )
   }
 

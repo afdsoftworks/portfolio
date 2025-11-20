@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { Project } from '@/types/project'
 import { FiSave, FiX, FiUpload, FiLoader, FiExternalLink, FiImage, FiVideo } from 'react-icons/fi'
 import Image from 'next/image'
@@ -56,20 +57,39 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
       return
     }
 
+    // Validar tamaño
+    const maxSize = isVideoField ? 50 * 1024 * 1024 : 5 * 1024 * 1024
+    if (file.size > maxSize) {
+      alert(`Archivo muy grande. Máximo ${isVideoField ? '50MB' : '5MB'}`)
+      return
+    }
+
     setUploading(true)
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('file', file)
+      const supabase = createClient()
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formDataToSend,
-      })
+      // Generar nombre único
+      const timestamp = Date.now()
+      const fileName = `${timestamp}-${file.name.replace(/\s+/g, '-')}`
+      const filePath = `projects/${fileName}`
 
-      const data = await res.json()
-      if (data.url) {
-        setFormData(prev => ({ ...prev, [fieldName]: data.url }))
-      }
+      // Subir directamente a Supabase Storage
+      const { error } = await supabase.storage
+        .from('project-images')
+        .upload(filePath, file, {
+          contentType: file.type,
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (error) throw error
+
+      // Obtener URL pública
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(filePath)
+
+      setFormData(prev => ({ ...prev, [fieldName]: publicUrl }))
     } catch (error) {
       console.error('Error uploading file:', error)
       alert('Error al subir el archivo')

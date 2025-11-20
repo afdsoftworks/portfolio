@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import Header from '@/components/admin/Header'
 import ProjectForm from '@/components/admin/ProjectForm'
@@ -15,11 +15,7 @@ export default function EditProjectPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    fetchProject()
-  }, [params.id])
-
-  const fetchProject = async () => {
+  const fetchProject = useCallback(async () => {
     try {
       const res = await fetch(`/api/projects/${params.id}`)
       if (res.ok) {
@@ -34,7 +30,11 @@ export default function EditProjectPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    fetchProject()
+  }, [fetchProject])
 
   if (loading) {
     return (

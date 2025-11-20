@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FiCode, FiExternalLink } from 'react-icons/fi'
 import { motion } from 'framer-motion'
@@ -10,9 +9,24 @@ import { useSectionNavigation } from '@/hooks/useSectionNavigation'
 import { Project } from '@/types/project'
 import MediaDisplay from './MediaDisplay'
 
+interface LocalProject {
+  id: string
+  nombre: string
+  descripcion: string
+  media_type: 'image' | 'video'
+  imagen: string | null
+  video_url: string | null
+  video_webm_url: string | null
+  video_poster: string | null
+  estado: 'Desplegado' | 'En Construcción' | 'Próximamente'
+  href: string
+  tags: string[]
+  order: number
+}
+
 export default function Portfolio() {
   const { navigateToSection } = useSectionNavigation()
-  const [proyectos, setProyectos] = useState<any[]>([])
+  const [proyectos, setProyectos] = useState<LocalProject[]>([])
   const [loading, setLoading] = useState(true)
 
   const [ref, inView] = useInView({
@@ -209,7 +223,7 @@ export default function Portfolio() {
                       className="text-xs px-2.5 py-1 rounded-full"
                       style={{
                         fontFamily: 'var(--font-inter)',
-                        ...(proyecto.estado === 'En construcción'
+                        ...(proyecto.estado === 'En Construcción'
                           ? {
                               background: 'rgba(234, 179, 8, 0.1)',
                               color: '#ca8a04',

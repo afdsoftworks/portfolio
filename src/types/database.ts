@@ -19,7 +19,7 @@ export type Database = {
           id: string
           title: string
           description: string
-          status: 'Desplegado' | 'En Construcción' | 'Próximamente'
+          status: 'Desplegado' | 'En Construcción' | 'Próximamente' | 'A la venta'
           media_type: 'image' | 'video'
           image_url: string | null
           video_url: string | null
@@ -35,7 +35,7 @@ export type Database = {
           id?: string
           title: string
           description: string
-          status: 'Desplegado' | 'En Construcción' | 'Próximamente'
+          status: 'Desplegado' | 'En Construcción' | 'Próximamente' | 'A la venta'
           media_type?: 'image' | 'video'
           image_url?: string | null
           video_url?: string | null

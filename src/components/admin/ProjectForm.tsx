@@ -169,6 +169,8 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
         return { bg: 'rgba(34, 197, 94, 0.1)', color: '#16a34a', border: 'rgba(34, 197, 94, 0.3)' }
       case 'En Construcción':
         return { bg: 'rgba(234, 179, 8, 0.1)', color: '#ca8a04', border: 'rgba(234, 179, 8, 0.3)' }
+      case 'A la venta':
+        return { bg: 'rgba(74, 122, 184, 0.1)', color: 'var(--blue-accent)', border: 'rgba(74, 122, 184, 0.3)' }
       default:
         return { bg: 'var(--cream-light)', color: 'var(--text-gray)', border: 'rgba(59, 90, 125, 0.1)' }
     }
@@ -455,6 +457,7 @@ export default function ProjectForm({ project, mode }: ProjectFormProps) {
             >
               <option value="En Construcción">En Construcción</option>
               <option value="Desplegado">Desplegado</option>
+              <option value="A la venta">A la venta</option>
             </select>
           </div>
 

@@ -5,7 +5,7 @@
 
 import { Database } from './database'
 
-export type ProjectStatus = 'Desplegado' | 'En Construcción' | 'Próximamente'
+export type ProjectStatus = 'Desplegado' | 'En Construcción' | 'Próximamente' | 'A la venta'
 
 export type Project = Database['public']['Tables']['projects']['Row']
 
